@@ -1,0 +1,31 @@
+# WoW/client runtime clutter
+WTF/
+Cache/
+Logs/
+Errors/
+Screenshots/
+
+# Editor/system files
+.vscode/
+.idea/
+*.tmp
+*.bak
+*.swp
+Thumbs.db
+Desktop.ini
+
+# AI/agent local instructions and tool state
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+.codex/
+.cursor/
+.cursorrules
+.agents/
+docs/ai/
+ai/
+
+# Build/package output
+build/
+dist/
+*.zip
