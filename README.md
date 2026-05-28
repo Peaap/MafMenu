@@ -1,3 +1,11 @@
+<img width="247" height="544" alt="image" src="https://github.com/user-attachments/assets/7f190c67-e213-4bee-b176-e87df3ab2854" />  <img width="248" height="661" alt="image" src="https://github.com/user-attachments/assets/81458cdd-3577-464a-b398-033761f30224" />  <img width="417" height="557" alt="image" src="https://github.com/user-attachments/assets/b2771d85-0535-4bd3-b9d5-bffb8b6f2772" />
+
+
+
+
+
+
+
 # MafMenu
 
 MafMenu is a World of Warcraft private-server addon for fast access to the Book of Maf services, server toggles, gear stats, and watched currencies.
