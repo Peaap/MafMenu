@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.2
+
+### Fixed
+
+- Added a defensive guard for invalid global `UIFrameFlash` entries that can be created by other addons and trigger `UIParent.lua` errors.
+
 ## 2.0.1
 
 ### Fixed

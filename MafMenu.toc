@@ -2,7 +2,7 @@
 ## Title: |cff00aaffMafMenu|r
 ## Notes: Book of Maf shortcut menu, currency watcher, and server toggles
 ## Author: Original Playerbots/MafMenu work credited to #Likon69; modernized fork by maintainers
-## Version:  2.0.1
+## Version:  2.0.2
 ## SavedVariables: MafMenu_SavedVars
 ## SavedVariablesPerCharacter: MafMenu_CharVars
 xml.xml
