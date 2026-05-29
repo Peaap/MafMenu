@@ -72,6 +72,35 @@ local function SetMafFont(fontString, size, flags)
     end
 end
 
+local function IsValidNumber(value)
+    return type(value) == "number" and value == value
+end
+
+local function SaveTopLeft(frame, target)
+    local left = frame:GetLeft()
+    local top = frame:GetTop()
+    if IsValidNumber(left) and IsValidNumber(top) then
+        target.left = left
+        target.top = top
+    else
+        target.left = nil
+        target.top = nil
+    end
+end
+
+local function RestoreTopLeft(frame, target, fallback)
+    frame:ClearAllPoints()
+    if target and IsValidNumber(target.left) and IsValidNumber(target.top) then
+        frame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", target.left, target.top)
+    elseif fallback then
+        if target then
+            target.left = nil
+            target.top = nil
+        end
+        fallback()
+    end
+end
+
 local function SetTooltip(button, text)
     button:SetScript("OnEnter", function(self)
         self:SetBackdropColor(unpack(COLORS.buttonHover))
@@ -300,11 +329,9 @@ panel:RegisterEvent("GOSSIP_SHOW")
 panel:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 panel:RegisterEvent("CHAT_MSG_CURRENCY")
 panel:SetSize(MafMenu_SavedVars.width, PANEL_HEIGHT)
-if MafMenu_SavedVars.left and MafMenu_SavedVars.top then
-    panel:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", MafMenu_SavedVars.left, MafMenu_SavedVars.top)
-else
+RestoreTopLeft(panel, MafMenu_SavedVars, function()
     panel:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-end
+end)
 panel:SetMovable(true)
 panel:SetResizable(true)
 panel:SetMinResize(PANEL_MIN_WIDTH, 1)
@@ -345,8 +372,7 @@ end)
 
 local function SavePanelPosition()
     MafMenu_SavedVars = MafMenu_SavedVars or {}
-    MafMenu_SavedVars.left = panel:GetLeft()
-    MafMenu_SavedVars.top = panel:GetTop()
+    SaveTopLeft(panel, MafMenu_SavedVars)
 end
 
 SLASH_MAFMENUDEBUG1 = "/mafdebug"
@@ -713,8 +739,7 @@ local function SaveCurrencyFramePosition()
     end
 
     EnsureSavedVars()
-    MafMenu_SavedVars.currency.left = currencyFrame:GetLeft()
-    MafMenu_SavedVars.currency.top = currencyFrame:GetTop()
+    SaveTopLeft(currencyFrame, MafMenu_SavedVars.currency)
 end
 
 local function CreateCurrencyFrame()
@@ -731,11 +756,9 @@ local function CreateCurrencyFrame()
     currencyFrame:SetFrameStrata("MEDIUM")
     ApplyBackdrop(currencyFrame, COLORS.panel, COLORS.panelBorder, 12, true)
 
-    if MafMenu_SavedVars.currency.left and MafMenu_SavedVars.currency.top then
-        currencyFrame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", MafMenu_SavedVars.currency.left, MafMenu_SavedVars.currency.top)
-    else
+    RestoreTopLeft(currencyFrame, MafMenu_SavedVars.currency, function()
         currencyFrame:SetPoint("LEFT", panel, "RIGHT", 8, 0)
-    end
+    end)
 
     currencyHeader = CreateFrame("Button", nil, currencyFrame)
     currencyHeader:SetHeight(24)

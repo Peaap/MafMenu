@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased
+## 2.0.1
+
+### Fixed
+
+- Guarded saved frame positions so invalid layout values fall back cleanly instead of triggering UIParent comparison errors.
+
+## 2.0.0
 
 ### Highlights
 
