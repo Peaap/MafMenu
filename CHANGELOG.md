@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.3
+
+### Fixed
+
+- Closed Book gossip through the WotLK client close path instead of directly hiding `GossipFrame`, preventing Escape-key UI state from getting stuck after opening services such as Bank.
+- Cleared pending Book service selections when gossip closes or times out.
+- Updated the addon TOC interface to `30300` for WoW 3.3.5a compatibility.
+
 ## 2.0.2
 
 ### Fixed

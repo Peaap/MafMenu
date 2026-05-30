@@ -190,6 +190,20 @@ gossipChecker:Hide()
 local BuildMenu
 local UpdateCurrencyFrame
 
+local function ClearPendingBookOption()
+    pendingGossipOption = nil
+    gossipWaitTime = 0
+    gossipChecker:Hide()
+end
+
+local function CloseBookGossipFrame()
+    if CloseGossip then
+        CloseGossip()
+    elseif GossipFrame and GossipFrame:IsVisible() then
+        GossipFrame:Hide()
+    end
+end
+
 local soundMute = {
     active = false,
     elapsed = 0,
@@ -286,12 +300,10 @@ local function SelectPendingBookOption()
     if pendingGossipOption and gossipWaitTime >= GOSSIP_SELECT_DELAY and GossipFrame and GossipFrame:IsVisible() then
         DebugPrint("Selecting gossip option " .. pendingGossipOption)
         SelectGossipOption(pendingGossipOption)
-        pendingGossipOption = nil
-        gossipWaitTime = 0
-        gossipChecker:Hide()
+        ClearPendingBookOption()
 
         if GossipFrame and GossipFrame:IsVisible() then
-            GossipFrame:Hide()
+            CloseBookGossipFrame()
         end
         return true
     end
@@ -303,9 +315,7 @@ gossipChecker:SetScript("OnUpdate", function(self, elapsed)
     if SelectPendingBookOption() then
         return
     elseif gossipWaitTime > GOSSIP_SELECT_TIMEOUT then
-        pendingGossipOption = nil
-        gossipWaitTime = 0
-        self:Hide()
+        ClearPendingBookOption()
     end
 end)
 
@@ -385,6 +395,7 @@ panel:RegisterEvent("PLAYER_LEAVING_WORLD")
 panel:RegisterEvent("PLAYER_LOGIN")
 panel:RegisterEvent("PLAYER_LOGOUT")
 panel:RegisterEvent("GOSSIP_SHOW")
+panel:RegisterEvent("GOSSIP_CLOSED")
 panel:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 panel:RegisterEvent("CHAT_MSG_CURRENCY")
 panel:SetSize(MafMenu_SavedVars.width, PANEL_HEIGHT)
@@ -400,6 +411,11 @@ panel:SetClampedToScreen(true)
 ApplyBackdrop(panel, COLORS.panel, COLORS.panelBorder, 12, true)
 panel:Show()
 panel:SetScript("OnEvent", function(_, event)
+    if event == "GOSSIP_CLOSED" then
+        ClearPendingBookOption()
+        return
+    end
+
     if event == "GOSSIP_SHOW" and pendingGossipOption then
         local delay = lastBookClickTime and (GetTime() - lastBookClickTime) or 0
         DebugPrint(string.format("GOSSIP_SHOW after %.3fs; selecting after %.2fs", delay, GOSSIP_SELECT_DELAY))

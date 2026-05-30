@@ -11,12 +11,14 @@
 MafMenu is a World of Warcraft private-server addon for fast access to the Book of Maf services, server toggles, gear stats, and watched currencies.
 
 ## Compatibility
+- Built for the MafWoW WotLK 3.3.5a client with `## Interface: 30300`.
 - Loads through `xml.xml`, which includes `Settings_frame.lua` and `2panel.lua`.
 - Uses saved variables:
   - `MafMenu_SavedVars`
   - `MafMenu_CharVars`
 ## Current Features
 - Temporary fizzle/error sound suppression around menu actions.
+- Book service selection closes gossip through the 3.3.5a client close path so Escape-key UI state stays clean after services such as Bank.
 - Favorites section for commonly used Book services.
 - Per-button visibility controls.
 - Separate movable/resizable currency watcher frame.
