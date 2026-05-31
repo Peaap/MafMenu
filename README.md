@@ -8,17 +8,37 @@
 
 # MafMenu
 
-MafMenu is a World of Warcraft private-server addon for fast access to the Book of Maf services, server toggles, gear stats, and watched currencies.
+MafMenu is a World of Warcraft private-server addon for fast access to the Book of Maf services, server toggles, gear stats, Playerbots controls, profiles, layout tools, and watched currencies.
+
+Maintained by @peaps. Original Playerbots/MafMenu work credited to #Likon69.
+
+GitHub: https://github.com/Peaap/MafMenu
+
+## Layout
+- `Libs/` embeds the WotLK-compatible Ace3 core used by MafMenu.
+- `Core.lua` creates the AceAddon object and owns AceConsole slash commands.
+- `Main.lua` initializes profiles, installs guards, and starts the panel.
+- `Modules/Profile.lua` owns saved-variable profile scope and normalization.
+- `Modules/Config.lua` registers the AceConfig options UI and AceDB profile manager.
+- `Modules/Panel.lua`, `Modules/Services.lua`, `Modules/Currency.lua`, `Modules/Playerbots.lua`, and `Modules/Minimap.lua` own the visible feature areas.
+- `Settings_frame.lua` keeps the legacy settings frame.
 
 ## Compatibility
 - Built for the MafWoW WotLK 3.3.5a client with `## Interface: 30300`.
-- Loads through `xml.xml`, which includes `Settings_frame.lua` and `2panel.lua`.
+- Loads through `xml.xml`, which includes the embedded Ace3 libraries, modules, `Settings_frame.lua`, and `Main.lua`.
 - Uses saved variables:
   - `MafMenu_SavedVars`
   - `MafMenu_CharVars`
+- Uses AceDB-backed profiles with MafMenu profile management controls.
 ## Current Features
 - Temporary fizzle/error sound suppression around menu actions.
 - Book service selection closes gossip through the 3.3.5a client close path so Escape-key UI state stays clean after services such as Bank.
+- Ace3-backed profile management for layouts, favorites, hidden services, and currency watcher choices.
+- AceConfig options window with panel, service, Playerbots, currency, behavior, appearance, and profile controls.
+- Playerbots quick controls for adding bots, party/raid commands, whisper-target commands, disperse, and custom commands.
+- Ace3-style skin treatment shared by the menu, currency watcher, title bars, buttons, hover states, and status buttons.
+- Main menu favorites, per-section collapse headers, lock/config title controls, and normal/text-only/icon-only display modes.
+- Currency watcher sorting, category headers, watched pins, dimmed zero values, and summary footer.
 - Favorites section for commonly used Book services.
 - Per-button visibility controls.
 - Separate movable/resizable currency watcher frame.

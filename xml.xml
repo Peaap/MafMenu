@@ -2,8 +2,19 @@
 ..\FrameXML\UI.xsd">
 
 
+<Include file ="Libs\Libs.xml"/>
+<Script file ="Core.lua"/>
+<Script file ="Modules\UI.lua"/>
+<Script file ="Modules\FlashGuard.lua"/>
+<Script file ="Modules\Profile.lua"/>
+<Script file ="Modules\Playerbots.lua"/>
+<Script file ="Modules\Services.lua"/>
+<Script file ="Modules\Currency.lua"/>
+<Script file ="Modules\Config.lua"/>
+<Script file ="Modules\Minimap.lua"/>
+<Script file ="Modules\Panel.lua"/>
 <Script file ="Settings_frame.lua"/>
-<Script file ="2panel.lua"/>
+<Script file ="Main.lua"/>
 
 
 </Ui>
